@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
   private EditText bookNumberEditText;
   private EditText chapterNumberEditText;
   private EditText verseNumberEditText;
+  private CheckBox russianNumberingCheckBox;
+  private EditText verseReferenceEditText;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
     bookNumberEditText = findViewById(R.id.edit_text_book_number);
     chapterNumberEditText = findViewById(R.id.edit_text_chapter_number);
     verseNumberEditText = findViewById(R.id.edit_text_verse_number);
-    configureGoButton();
+    russianNumberingCheckBox = findViewById(R.id.check_box_russian_numbering);
+    verseReferenceEditText = findViewById(R.id.edit_text_verse_reference);
+    configureOpenByNumberingButton();
+    configureOpenByReferenceStringButton();
   }
 
-  private void configureGoButton() {
-    findViewById(R.id.button_show).setOnClickListener(
+  private void configureOpenByNumberingButton() {
+    findViewById(R.id.button_open_by_numbering).setOnClickListener(
         (view) -> {
 
           final String moduleAbbreviation =
@@ -35,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
           final short bookNumber = getValue(bookNumberEditText);
           final short chapterNumber = getValue(chapterNumberEditText);
           final short verseNumber = getValue(verseNumberEditText);
+          final boolean russianNumbering = russianNumberingCheckBox.isChecked();
 
           Intent launchIntent = getPackageManager().getLaunchIntentForPackage("ua.mybible");
           if (launchIntent != null) {
             final Bundle bundle = new Bundle();
 
-            if ( moduleAbbreviation != null ) {
+            if (moduleAbbreviation != null) {
               // Optional Bible module abbreviation.
               // If not specified, a Bible module currently selected in an active Bible window
               // will be used.
@@ -57,7 +64,34 @@ public class MainActivity extends AppCompatActivity {
             // A verse number, shall be greater than 0.
             bundle.putShort("verse", verseNumber);
 
+            // An indication whether a provided numbering for Psalms is Russian.
+            bundle.putBoolean("russian_numbering", russianNumbering);
+
             launchIntent.putExtra("position", bundle);
+            startActivity(launchIntent);
+          }
+        }
+    );
+  }
+
+  private void configureOpenByReferenceStringButton() {
+    findViewById(R.id.button_open_by_reference_string).setOnClickListener(
+        (view) -> {
+
+          final String referenceString = verseReferenceEditText.getText().toString();
+          final boolean russianNumbering = russianNumberingCheckBox.isChecked();
+
+          Intent launchIntent = getPackageManager().getLaunchIntentForPackage("ua.mybible");
+          if (launchIntent != null) {
+            final Bundle bundle = new Bundle();
+
+            // A reference string.
+            bundle.putString("reference_string", referenceString);
+
+            // An indication whether a provided numbering for Psalms is Russian.
+            bundle.putBoolean("russian_numbering", russianNumbering);
+
+            launchIntent.putExtra("reference", bundle);
             startActivity(launchIntent);
           }
         }

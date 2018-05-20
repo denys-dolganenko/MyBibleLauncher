@@ -5,9 +5,16 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+    <CheckBox
+        android:id="@+id/check_box_russian_numbering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Russian numbering of Psalms" />
+
     <TableLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TableRow>
 
@@ -19,8 +26,7 @@
             <EditText
                 android:id="@+id/edit_text_abbreviation"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="RST+" />
+                android:layout_height="wrap_content" />
 
         </TableRow>
 
@@ -33,7 +39,7 @@
 
             <EditText
                 android:id="@+id/edit_text_book_number"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:text="10" />
@@ -49,7 +55,7 @@
 
             <EditText
                 android:id="@+id/edit_text_chapter_number"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:text="11" />
@@ -65,7 +71,7 @@
 
             <EditText
                 android:id="@+id/edit_text_verse_number"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:text="5" />
@@ -75,11 +81,36 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/button_show"
+        android:id="@+id/button_open_by_numbering"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:text="Show" />
+        android:text="Open MyBible for numbering above" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reference string:" />
+
+        <EditText
+            android:id="@+id/edit_text_verse_reference"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Ps 22:1" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_open_by_reference_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Open MyBible for reference string above" />
 
 </LinearLayout>
