@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // A book number, shall be greater than 0.
-            // See https://docs.google.com/document/d/12rf4Pqy13qhnAW31uKkaWNTBDTtRbNW0s7cM0vcimlA/edit#heading=h.55b1k11igp72
+            // See the table of books in the MyBible Modules Format document.
             bundle.putShort("book", bookNumber);
 
             // A chapter number, shall be greater than 0.
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             final Bundle bundle = new Bundle();
 
             // A reference string.
+            // See the MyBible Auto-Hyperlinks Support document.
             bundle.putString("reference_string", referenceString);
 
             // An indication whether a provided numbering for Psalms is Russian.
